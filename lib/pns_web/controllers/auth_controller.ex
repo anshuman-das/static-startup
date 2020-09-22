@@ -24,9 +24,7 @@ defmodule PnsWeb.AuthController do
         nil -> %User{email: auth.info.email}
         user -> user
       end
-      |> IO.inspect(label: "user")
       |> User.changeset(user_params)
-      |> IO.inspect(label: "user_params")
       |> Repo.insert_or_update()
 
     case result do
