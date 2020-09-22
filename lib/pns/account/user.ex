@@ -15,7 +15,7 @@ defmodule Pns.Account.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:email, :first_name, :last_name, :provider, :picture])
+    |> cast(attrs, [:email, :first_name, :last_name, :provider, :picture, :updated_at])
     |> validate_required([:email, :first_name, :last_name, :provider, :picture])
   end
 end

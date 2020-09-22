@@ -13,6 +13,13 @@ defmodule PnsWeb.Router do
     plug :accepts, ["json"]
   end
 
+  scope "/auth", PnsWeb do
+    pipe_through :browser
+
+    get "/:provider", AuthController, :request
+    get "/:provider/callback", AuthController, :callback
+  end
+
   scope "/", PnsWeb do
     pipe_through :browser
 
