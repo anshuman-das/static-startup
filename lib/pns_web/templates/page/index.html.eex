@@ -1,6 +1,6 @@
 <section class="phx-hero">
   <h1><%= gettext "Welcome to %{name}!", name: "Hackathon 2020" %></h1>
-  <p>A productive web framework that<br/>does not compromise speed or maintainability.</p>
+  <p>Static-Startup presents<br/>Push Notification Service (PNS).</p>
 </section>
 
 <section class="row">
