@@ -1,5 +1,5 @@
 <section class="phx-hero">
   <h1><%= gettext "Welcome to %{name}!", name: "Hackathon 2020" %></h1>
-  <p>Static-Startup presents<br/>Push Notification Service (PNS).</p>
+  <p>Static-Startup presents<br/><a href="<%= Routes.static_path(@conn, "/events") %>">Push Notification Service (PNS).</a></p>
 </section>
 
