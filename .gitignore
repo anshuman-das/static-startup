@@ -11,3 +11,6 @@ erl_crash.dump
 node_modules/
 _build/dev/lib/pns/.mix/compile.elixir
 _build/dev/lib/pns/ebin/Elixir.PnsWeb.PageView.beam
+*.elixir
+*.beam
+.vscode/
