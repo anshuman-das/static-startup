@@ -1,0 +1,33 @@
+<h1>Show Event</h1>
+
+<ul>
+
+  <li>
+    <strong>Website url:</strong>
+    <%= @event.website_url %>
+  </li>
+
+  <li>
+    <strong>Start time:</strong>
+    <%= @event.start_time %>
+  </li>
+
+  <li>
+    <strong>End time:</strong>
+    <%= @event.end_time %>
+  </li>
+
+  <li>
+    <strong>Html template:</strong>
+    <%= @event.html_template %>
+  </li>
+
+  <li>
+    <strong>Key:</strong>
+    <%= @event.key %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.event_path(@conn, :edit, @event) %></span>
+<span><%= link "Back", to: Routes.event_path(@conn, :index) %></span>
