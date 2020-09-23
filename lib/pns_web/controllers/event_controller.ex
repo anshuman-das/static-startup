@@ -8,7 +8,7 @@ defmodule PnsWeb.EventController do
     case Plug.Conn.get_session(conn, :user_id) do
       nil ->
         conn
-        |> put_flash(:error, "Please Login in")
+        |> put_flash(:error, "Please Login")
         |> redirect(to: Routes.page_path(conn, :index))
 
       _ ->
@@ -21,8 +21,16 @@ defmodule PnsWeb.EventController do
   end
 
   def new(conn, _params) do
-    changeset = Account.change_event(%Event{})
-    render(conn, "new.html", changeset: changeset)
+    case Plug.Conn.get_session(conn, :user_id) do
+      nil ->
+        conn
+        |> put_flash(:error, "Please Login")
+        |> redirect(to: Routes.page_path(conn, :index))
+
+      _ ->
+        changeset = Account.change_event(%Event{})
+        render(conn, "new.html", changeset: changeset)
+    end
   end
 
   def create(conn, %{"event" => event_params}) do
@@ -43,14 +51,30 @@ defmodule PnsWeb.EventController do
   end
 
   def show(conn, %{"id" => id}) do
-    event = Account.get_event!(id)
-    render(conn, "show.html", event: event)
+    case Plug.Conn.get_session(conn, :user_id) do
+      nil ->
+        conn
+        |> put_flash(:error, "Please Login")
+        |> redirect(to: Routes.page_path(conn, :index))
+
+      _ ->
+        event = Account.get_event!(id)
+        render(conn, "show.html", event: event)
+    end
   end
 
   def edit(conn, %{"id" => id}) do
-    event = Account.get_event!(id)
-    changeset = Account.change_event(event)
-    render(conn, "edit.html", event: event, changeset: changeset)
+    case Plug.Conn.get_session(conn, :user_id) do
+      nil ->
+        conn
+        |> put_flash(:error, "Please Login")
+        |> redirect(to: Routes.page_path(conn, :index))
+
+      _ ->
+        event = Account.get_event!(id)
+        changeset = Account.change_event(event)
+        render(conn, "edit.html", event: event, changeset: changeset)
+    end
   end
 
   def update(conn, %{"id" => id, "event" => event_params}) do

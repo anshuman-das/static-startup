@@ -4,7 +4,8 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title><%= assigns[:page_title] || "Pns · Phoenix Framework" %></title>
+    <title><%= assigns[:page_title] || "Push Notification Service (PNS)" %></title>
+    <link rel="shortcut icon" type="image/jpg" href="<%= Routes.static_path(@conn, "/images/wm-favicon.png") %>"/>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
     <%= csrf_meta_tag() %>
   </head>
@@ -20,8 +21,8 @@
               <% end %>
           </ul>
         </nav>
-        <a href="https://phoenixframework.org/" class="phx-logo">
-          <img src="<%= Routes.static_path(@conn, "/images/phoenix.png") %>" alt="Phoenix Framework Logo"/>
+        <a href="https://www.watermarkinsights.com/" class="phx-logo">
+          <img src="<%= Routes.static_path(@conn, "/images/wm-logo.png") %>" alt="Watermark Logo"/>
         </a>
       </section>
     </header>
