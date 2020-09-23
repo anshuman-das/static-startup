@@ -24,6 +24,8 @@ defmodule PnsWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/logout", AuthController, :delete
+    resources "/events", EventController
   end
 
   # Other scopes may use custom stacks.
