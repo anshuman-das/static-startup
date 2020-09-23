@@ -20,7 +20,7 @@ defmodule Pns.MixProject do
   def application do
     [
       mod: {Pns.Application, []},
-      extra_applications: [:logger, :runtime_tools, :ueberauth_google]
+      extra_applications: [:logger, :runtime_tools, :ueberauth_google, :elixir_uuid]
     ]
   end
 
@@ -43,7 +43,8 @@ defmodule Pns.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:ueberauth_google, "~> 0.9"}
+      {:ueberauth_google, "~> 0.9"},
+      {:elixir_uuid, "~> 1.2"}
     ]
   end
 

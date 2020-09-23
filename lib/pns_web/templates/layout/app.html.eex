@@ -13,7 +13,11 @@
       <section class="container">
         <nav role="navigation">
           <ul>
-            <li><a href="<%= Routes.static_path(@conn, "/auth/google") %>">Login</a></li>
+            <%= if Plug.Conn.get_session(@conn, :user_id) == nil do %>
+                <li><a href="<%= Routes.static_path(@conn, "/auth/google") %>">Login</a></li>
+              <% else %>
+                <li><a href="<%= Routes.static_path(@conn, "/logout") %>">Logout</a></li>
+              <% end %>
           </ul>
         </nav>
         <a href="https://phoenixframework.org/" class="phx-logo">
