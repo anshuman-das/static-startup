@@ -8,14 +8,21 @@ defmodule Pns.Schema.Event do
     field :html_template, :string
     field :start_time, :naive_datetime
     field :user_id, :id
-
+    field :application_id, :id
     timestamps()
   end
 
   @doc false
   def changeset(event, attrs) do
     event
-    |> cast(attrs, [:name, :start_time, :end_time, :html_template, :user_id])
-    |> validate_required([:name, :start_time, :end_time, :html_template, :user_id])
+    |> cast(attrs, [:name, :start_time, :end_time, :html_template, :user_id, :application_id])
+    |> validate_required([
+      :name,
+      :start_time,
+      :end_time,
+      :html_template,
+      :user_id,
+      :application_id
+    ])
   end
 end

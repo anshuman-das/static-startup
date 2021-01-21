@@ -23,5 +23,5 @@
 
 </ul>
 
-<span><%= link "Edit", to: Routes.event_path(@conn, :edit, @event) %></span>
-<span><%= link "Back", to: Routes.event_path(@conn, :index) %></span>
+<span><%= link "Edit", to: Routes.application_event_path(@conn, :edit, @event.application_id, @event) %></span>
+<span><%= link "Back", to: Routes.application_event_path(@conn, :index, @event.application_id) %></span>

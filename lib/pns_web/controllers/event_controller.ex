@@ -4,7 +4,7 @@ defmodule PnsWeb.EventController do
   alias Pns.Services.EventService
   alias Pns.Schema.Event
 
-  def index(conn, _params) do
+  def index(conn, %{"application_id" => application_id}) do
     case Plug.Conn.get_session(conn, :user_id) do
       nil ->
         conn
@@ -16,11 +16,11 @@ defmodule PnsWeb.EventController do
           EventService.list_events()
           |> Enum.filter(fn x -> x.user_id == Plug.Conn.get_session(conn, :user_id) end)
 
-        render(conn, "index.html", events: events)
+        render(conn, "index.html", data: %{events: events, application_id: application_id})
     end
   end
 
-  def new(conn, _params) do
+  def new(conn, %{"application_id" => application_id}) do
     case Plug.Conn.get_session(conn, :user_id) do
       nil ->
         conn
@@ -29,21 +29,22 @@ defmodule PnsWeb.EventController do
 
       _ ->
         changeset = EventService.change_event(%Event{})
-        render(conn, "new.html", changeset: changeset)
+        render(conn, "new.html", data: %{changeset: changeset, application_id: application_id})
     end
   end
 
-  def create(conn, %{"event" => event_params}) do
+  def create(conn, %{"application_id" => application_id, "event" => event_params}) do
     event_params =
       event_params
       |> Map.put("user_id", Plug.Conn.get_session(conn, :user_id))
-      |> Map.put("key", UUID.uuid4())
+      |> Map.put("application_id", application_id)
+      |> IO.inspect(label: ">>>>>>>>>>")
 
     case EventService.create_event(event_params) do
       {:ok, event} ->
         conn
         |> put_flash(:info, "Event created successfully.")
-        |> redirect(to: Routes.event_path(conn, :show, event))
+        |> redirect(to: Routes.application_event_path(conn, :show, event.application_id, event))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
@@ -84,7 +85,7 @@ defmodule PnsWeb.EventController do
       {:ok, event} ->
         conn
         |> put_flash(:info, "Event updated successfully.")
-        |> redirect(to: Routes.event_path(conn, :show, event))
+        |> redirect(to: Routes.application_event_path(conn, :show, event.application_id, event))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", event: event, changeset: changeset)
@@ -97,6 +98,6 @@ defmodule PnsWeb.EventController do
 
     conn
     |> put_flash(:info, "Event deleted successfully.")
-    |> redirect(to: Routes.event_path(conn, :index))
+    |> redirect(to: Routes.application_event_path(conn, :index, event.application_id))
   end
 end

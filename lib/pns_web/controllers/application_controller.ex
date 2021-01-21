@@ -39,13 +39,12 @@ defmodule PnsWeb.ApplicationController do
       application_params
       |> Map.put("creator_id", Plug.Conn.get_session(conn, :user_id))
       |> Map.put("key", UUID.uuid4())
-      |> IO.inspect(label: ">>>>>>>>>>>>")
 
     case ApplicationService.create_application(application_params) do
       {:ok, application} ->
         conn
         |> put_flash(:info, "Application created successfully.")
-        |> redirect(to: Routes.application_path(conn, :show, application))
+        |> redirect(to: Routes.application_path(conn, :index, application))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
