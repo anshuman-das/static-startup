@@ -38,6 +38,22 @@ defmodule Pns.Account do
   def get_event!(id), do: Repo.get!(Event, id)
 
   @doc """
+  Gets a single event by key.
+
+  Raises `Ecto.NoResultsError` if the Event does not exist.
+
+  ## Examples
+
+      iex> get_event_by_key!(123)
+      %Event{}
+
+      iex> get_event_by_key!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_event_by_key!(key), do: Repo.get_by!(Event, key: key)
+
+  @doc """
   Creates a event.
 
   ## Examples

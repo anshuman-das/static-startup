@@ -28,8 +28,9 @@ defmodule PnsWeb.Router do
     resources "/events", EventController
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", PnsWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", PnsWeb do
+    pipe_through :api
+
+    get "/event/:key", Api.EventController, :get_event_by_key
+  end
 end
