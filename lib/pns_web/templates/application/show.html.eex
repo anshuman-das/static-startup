@@ -1,0 +1,29 @@
+<h1>Show Application</h1>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= link @application.name, to: Routes.event_path(@conn, :index) %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @application.description %>
+  </li>
+
+  <li>
+    <strong>Website url:</strong>
+    <%= @application.url %>
+  </li>
+
+
+  <li>
+    <strong>Key:</strong>
+    <%= @application.key %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.application_path(@conn, :edit, @application) %></span>
+<span><%= link "Back", to: Routes.application_path(@conn, :index) %></span>

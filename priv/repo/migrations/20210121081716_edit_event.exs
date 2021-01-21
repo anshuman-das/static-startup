@@ -3,6 +3,7 @@ defmodule Pns.Repo.Migrations.EditEvent do
 
   def change do
     alter table(:events) do
+      add(:name, :text)
       add(:application_id, references(:applications, on_delete: :delete_all))
       remove(:website_url)
       remove(:key)

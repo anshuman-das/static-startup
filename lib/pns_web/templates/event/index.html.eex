@@ -3,11 +3,10 @@
 <table>
   <thead>
     <tr>
-      <th>Website url</th>
+      <th>Name</th>
       <th>Start time</th>
       <th>End time</th>
       <th>Html template</th>
-      <th>Key</th>
 
       <th></th>
     </tr>
@@ -15,11 +14,10 @@
   <tbody>
 <%= for event <- @events do %>
     <tr>
-      <td><%= event.website_url %></td>
+      <td><%= event.name %></td>
       <td><%= event.start_time %></td>
       <td><%= event.end_time %></td>
       <td><%= event.html_template %></td>
-      <td><%= event.key %></td>
 
       <td>
         <span><%= link "Show", to: Routes.event_path(@conn, :show, event) %></span>

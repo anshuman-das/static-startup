@@ -1,4 +1,4 @@
-defmodule Pns.Account.User do
+defmodule Pns.Schema.User do
   use Ecto.Schema
   import Ecto.Changeset
 

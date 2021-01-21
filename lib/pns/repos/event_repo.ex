@@ -1,12 +1,12 @@
-defmodule Pns.Account do
+defmodule Pns.Repos.Event do
   @moduledoc """
-  The Account context.
+  The Event repository.
   """
 
   import Ecto.Query, warn: false
   alias Pns.Repo
 
-  alias Pns.Account.Event
+  alias Pns.Schema.Event
 
   @doc """
   Returns the list of events.

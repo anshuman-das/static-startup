@@ -2,7 +2,7 @@ defmodule PnsWeb.AuthController do
   use PnsWeb, :controller
   plug Ueberauth
   alias Pns.Repo
-  alias Pns.Account.User
+  alias Pns.Schema.User
 
   def callback(%{assigns: %{ueberauth_failure: _fails}} = conn, _params) do
     conn
@@ -32,7 +32,7 @@ defmodule PnsWeb.AuthController do
         conn
         |> put_flash(:info, "Thank you for signing in!")
         |> put_session(:user_id, user.id)
-        |> redirect(to: Routes.event_path(conn, :index))
+        |> redirect(to: Routes.application_path(conn, :index))
 
       {:error, _reason} ->
         conn

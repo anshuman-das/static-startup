@@ -1,10 +1,9 @@
-defmodule Pns.Account.Event do
+defmodule Pns.Schema.Event do
   use Ecto.Schema
   import Ecto.Changeset
 
-  @url_regex ~r/^(http|https):\/\/\w+(\.\w+)*(:[0-9]+)?\/?(\/[.\w]*)*$/
-
   schema "events" do
+    field :name, :string
     field :end_time, :naive_datetime
     field :html_template, :string
     field :start_time, :naive_datetime
@@ -16,7 +15,7 @@ defmodule Pns.Account.Event do
   @doc false
   def changeset(event, attrs) do
     event
-    |> cast(attrs, [:start_time, :end_time, :html_template, :user_id])
-    |> validate_required([:start_time, :end_time, :html_template, :user_id])
+    |> cast(attrs, [:name, :start_time, :end_time, :html_template, :user_id])
+    |> validate_required([:name, :start_time, :end_time, :html_template, :user_id])
   end
 end
