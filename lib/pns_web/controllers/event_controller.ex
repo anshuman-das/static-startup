@@ -6,8 +6,24 @@ defmodule PnsWeb.EventController do
 
   def index(conn, %{"application_id" => application_id}) do
     events = EventService.list_events(application_id)
+    past_events =
+      events
+      |> Enum.filter(fn event ->
+      event.start_time < NaiveDateTime.utc_now()
+    end)
+    current_events =
+      events
+      |> Enum.filter(fn event ->
+      event.start_time >= NaiveDateTime.utc_now() &&
+        event.end_time <= NaiveDateTime.utc_now()
+    end)
+    future_events =
+      events
+      |> Enum.filter(fn event ->
+      event.start_time > NaiveDateTime.utc_now() 
+    end)
 
-    render(conn, "index.html", data: %{events: events, application_id: application_id})
+    render(conn, "index.html", data: %{past_events: past_events, current_events: current_events, future_events: future_events, application_id: application_id})
   end
 
   def new(conn, %{"application_id" => application_id}) do
