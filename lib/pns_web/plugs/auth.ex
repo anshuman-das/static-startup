@@ -2,7 +2,6 @@ defmodule PnsWeb.Plugs.Auth do
   import Plug.Conn
   import Phoenix.Controller
   alias PnsWeb.Router.Helpers, as: Routes
-  alias Pns.Services.UserService
 
   def init(opts), do: opts
 
