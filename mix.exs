@@ -44,7 +44,9 @@ defmodule Pns.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:ueberauth_google, "~> 0.9"},
-      {:elixir_uuid, "~> 1.2"}
+      {:elixir_uuid, "~> 1.2"},
+      {:cors_plug, "~> 2.0"},
+      {:timex, "~> 3.6"}
     ]
   end
 

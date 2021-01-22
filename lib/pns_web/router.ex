@@ -36,6 +36,7 @@ defmodule PnsWeb.Router do
   scope "/api", PnsWeb do
     pipe_through :api
 
-    get "/event/:key", Api.EventController, :get_event_by_key
+    get "/current_event/:key", Api.EventController, :get_current_event_by_application_key
+    get "/all_events/:key", Api.EventController, :get_all_events_by_application_key
   end
 end
