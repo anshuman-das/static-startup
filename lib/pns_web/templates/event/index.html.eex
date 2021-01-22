@@ -1,34 +1,133 @@
-<h1>Listing Events</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Website url</th>
-      <th>Start time</th>
-      <th>End time</th>
-      <th>Html template</th>
-      <th>Key</th>
-
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-<%= for event <- @events do %>
-    <tr>
-      <td><%= event.website_url %></td>
-      <td><%= event.start_time %></td>
-      <td><%= event.end_time %></td>
-      <td><%= event.html_template %></td>
-      <td><%= event.key %></td>
-
-      <td>
-        <span><%= link "Show", to: Routes.event_path(@conn, :show, event) %></span>
-        <span><%= link "Edit", to: Routes.event_path(@conn, :edit, event) %></span>
-        <span><%= link "Delete", to: Routes.event_path(@conn, :delete, event), method: :delete, data: [confirm: "Are you sure?"] %></span>
-      </td>
-    </tr>
+<div class ="regApplicationHeader">
+<div><h1>Application Events</h1></div>
+<%= if ((length @data.past_events) + (length @data.current_events) + (length @data.future_events)) > 0 do %>
+<div class = "buttonDiv"><%= link "Create New Event", to: Routes.application_event_path(@conn, :new, @data.application_id) %></div>
 <% end %>
-  </tbody>
-</table>
-
-<span><%= link "New Event", to: Routes.event_path(@conn, :new) %></span>
+</div>
+<%= if ((length @data.past_events) + (length @data.current_events) + (length @data.future_events)) > 0 do %>
+<div class ="accordion-container" >
+    <div class="tab">
+      <input id="tab-1" type="checkbox">
+      <label for="tab-1">Past Application Events</label>
+          <div class="tab-content">
+            <%= if (length @data.past_events) > 0 do %>
+            <table id = "applicationEventsTable">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Start time</th>
+                  <th>End time</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+            <%= for event <- @data.past_events do %>
+                <tr>
+                  <td><%= event.name %></td>
+                  <td><%= event.start_time %></td>
+                  <td><%= event.end_time %></td>
+                  <td>
+                  <a class = "fa fa-folder" href=" <%=Routes.application_event_path(@conn, :show, event.application_id, event) %>" title="View"></a>
+                  <a class = "fa fa-edit" href=" <%=Routes.application_event_path(@conn, :edit, event.application_id, event) %>" title="Edit"></a>
+                  <a class = "fa fa-trash" href=" <%=Routes.application_event_path(@conn, :delete, event.application_id, event)%>"
+                    title="Delete" data-confirm= "Are you sure?" data-method = "delete"
+                    data-to= " <%=Routes.application_event_path(@conn, :delete, event.application_id, event)%>" rel = "nofollow"
+                    data-csrf="H2EWfkJeZAZYbh4hcw1iG0IQATAHVjQ-iLNG4kIO29UJEw5a6H9eWfVg"></a>
+                  </td>
+                </tr>
+            <% end %>
+              </tbody>
+            </table>
+            <% else %>
+            <div class = "emptyEvents">
+                <div class = "emptyMessage">There are no past application events . Please create new event.</div>
+            </div>
+            <% end %>
+      </div>
+  </div>
+  <div class="tab">
+        <input id="tab-2" type="checkbox">
+        <label for="tab-2">Active Application Events</label>
+            <div class="tab-content">
+              <%= if (length @data.current_events) > 0 do %>
+                <table id = "applicationEventsTable">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Start time</th>
+                      <th>End time</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                <%= for event <- @data.current_events do %>
+                    <tr>
+                      <td><%= event.name %></td>
+                      <td><%= event.start_time %></td>
+                      <td><%= event.end_time %></td>
+                      <td>
+                      <a class = "fa fa-folder" href=" <%=Routes.application_event_path(@conn, :show, event.application_id, event) %>" title="View"></a>
+                      <a class = "fa fa-edit" href=" <%=Routes.application_event_path(@conn, :edit, event.application_id, event) %>" title="Edit"></a>
+                      <a class = "fa fa-trash" href=" <%=Routes.application_event_path(@conn, :delete, event.application_id, event)%>"
+                        title="Delete" data-confirm= "Are you sure?" data-method = "delete"
+                        data-to= " <%=Routes.application_event_path(@conn, :delete, event.application_id, event)%>" rel = "nofollow"
+                        data-csrf="H2EWfkJeZAZYbh4hcw1iG0IQATAHVjQ-iLNG4kIO29UJEw5a6H9eWfVg"></a>
+                      </td>
+                    </tr>
+                <% end %>
+                  </tbody>
+                </table>
+              <% else %>
+              <div class = "emptyEvents">
+                  <div class = "emptyMessage">There are no active application events . Please create new event.</div>
+              </div>
+              <% end %>
+        </div>
+    </div>
+    <div class="tab">
+          <input id="tab-3" type="checkbox">
+          <label for="tab-3">Future Application Events</label>
+              <div class="tab-content">
+                <%= if (length @data.future_events) > 0 do %>
+                <table id = "applicationEventsTable">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Start time</th>
+                      <th>End time</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                <%= for event <- @data.future_events do %>
+                    <tr>
+                      <td><%= event.name %></td>
+                      <td><%= event.start_time %></td>
+                      <td><%= event.end_time %></td>
+                      <td>
+                      <a class = "fa fa-folder" href=" <%=Routes.application_event_path(@conn, :show, event.application_id, event) %>" title="View"></a>
+                      <a class = "fa fa-edit" href=" <%=Routes.application_event_path(@conn, :edit, event.application_id, event) %>" title="Edit"></a>
+                      <a class = "fa fa-trash" href=" <%=Routes.application_event_path(@conn, :delete, event.application_id, event)%>"
+                        title="Delete" data-confirm= "Are you sure?" data-method = "delete"
+                        data-to= " <%=Routes.application_event_path(@conn, :delete, event.application_id, event)%>" rel = "nofollow"
+                        data-csrf="H2EWfkJeZAZYbh4hcw1iG0IQATAHVjQ-iLNG4kIO29UJEw5a6H9eWfVg"></a>
+                      </td>
+                    </tr>
+                <% end %>
+                  </tbody>
+                </table>
+                <% else %>
+                <div class = "emptyEvents">
+                    <div class = "emptyMessage">There are no future application events . Please create new event.</div>
+                </div>
+                <% end %>
+          </div>
+      </div>
+    </div>
+<% else %>
+<div class = "emptyEvents">
+<div class = "emptyMessage">There are no application events created. Please create new event.</div>
+<div class = "buttonDiv"><%= link "Create New Event", to: Routes.application_event_path(@conn, :new, @data.application_id) %></div>
+<div>
+<% end %>

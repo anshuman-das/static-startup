@@ -1,0 +1,45 @@
+<div class ="regApplicationHeader">
+<div><h1>Registed Applications</h1></div>
+<%= if (length @applications) > 0 do %>
+<div class = "buttonDiv"><%= link "Register New Application", to: Routes.application_path(@conn, :new) %></div>
+<% end %>
+</div>
+<%= if (length @applications) > 0 do %>
+<table id="regApplicationTable">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>URL</th>
+      <th>Description</th>
+      <th>Key</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for application <- @applications do %>
+    <tr>
+      <td><%= link application.name, to: Routes.application_event_path(@conn, :index, application.id) %></td>
+      <td><%= application.url %></td>
+      <td><%= application.description %></td>
+      <td><%= application.key %></td>
+
+      <td>
+        <a class = "fa fa-folder" href=" <%=Routes.application_path(@conn, :show, application) %>" title="View"></a>
+        <a class = "fa fa-edit" href=" <%=Routes.application_path(@conn, :edit, application) %>" title="Edit"></a>
+        <a class = "fa fa-trash" href=" <%=Routes.application_path(@conn, :delete, application)%>"
+          title="Delete" data-confirm= "Are you sure?" data-method = "delete"
+          data-to= " <%=Routes.application_path(@conn, :delete, application)%>" rel = "nofollow"
+          data-csrf="H2EWfkJeZAZYbh4hcw1iG0IQATAHVjQ-iLNG4kIO29UJEw5a6H9eWfVg"></a>
+
+
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+<% else %>
+<div class = "emptyEvents">
+<div class = "emptyMessage">There are no applications registered. Please register new application.</div>
+<div class = "buttonDiv"><%= link "Register New Application", to: Routes.application_path(@conn, :new) %></div>
+<div>
+<% end %>

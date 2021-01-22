@@ -1,3 +1,235 @@
 /* This file is for your main application css. */
 
 @import "./phoenix.css";
+.container {
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  width: 100%;
+}
+.bodyContainer {
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  position: relative;
+  width: 70%;
+  background-color: #eeeeee2b;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+  overflow: auto;
+}
+
+.regApplicationHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+.buttonDiv {
+  background-color: #575195;
+  border: 0.1rem solid #575195;
+  border-radius: 0.4rem;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  height: 3.8rem;
+  letter-spacing: 0.1rem;
+  line-height: 3.8rem;
+  padding: 0 2rem;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.buttonDiv a {
+  color: white;
+}
+#regApplicationTable {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#regApplicationTable td,
+#regApplicationTable th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+#regApplicationTable th:last-child {
+  text-align: right;
+}
+#regApplicationTable td:last-child {
+  text-align: right;
+}
+#regApplicationTable td a {
+  padding: 0 5px;
+  color: #575195;
+  font-size: 18px;
+}
+#applicationEventsTable td a:hover {
+  color: #0069d9;
+}
+#regApplicationTable tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#regApplicationTable tr:hover {
+  background-color: #ddd;
+}
+
+#regApplicationTable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #575195;
+  color: white;
+}
+
+.btn-position {
+  text-align: right;
+}
+.btn-color {
+  color: #5a2a98;
+  border: none;
+  background: none;
+  padding: 2px 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 0;
+}
+.btn-color:hover {
+  background-color: #5a2a80;
+}
+
+#applicationTable {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#applicationTable td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#applicationTable tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+#applicationTable td:first-child {
+  font-weight: bold;
+}
+
+#applicationEventsTable {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#applicationEventsTable td,
+#applicationEventsTable th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+#applicationEventsTable th:last-child {
+  text-align: right;
+}
+#applicationEventsTable td:last-child {
+  text-align: right;
+}
+#applicationEventsTable td a {
+  padding: 0 5px;
+  color: #575195;
+  font-size: 18px;
+}
+#applicationEventsTable td a:hover {
+  color: #0069d9;
+}
+#applicationEventsTable tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#applicationEventsTable tr:hover {
+  background-color: #ddd;
+}
+
+#applicationEventsTable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #575195;
+  color: white;
+}
+.eventSubmit {
+  margin-top: 20px;
+}
+.emptyEvents {
+  text-align: center;
+}
+.emptyMessage {
+  font-style: italic;
+  font-size: 14px;
+  margin: 20px;
+}
+
+#eventTable {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#eventTable td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#eventTable tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+#eventTable td:first-child {
+  font-weight: bold;
+}
+.accordion-container {
+  margin-bottom: 40px;
+}
+.tab {
+  position: relative;
+}
+.tab input {
+  display: none;
+}
+.tab label {
+  display: block;
+  margin-top: 10px;
+  padding: 10px;
+  color: #575195;
+  font-weight: bold;
+  background-color: #eeeeee2b;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  border-radius: 2px;
+}
+.tab .tab-content {
+  overflow: hidden;
+  transition: max-height 0.3s;
+  max-height: 0;
+  font-size: 14px;
+}
+
+.tab .tab-content p {
+  padding: 10px;
+}
+.tab input:checked ~ .tab-content {
+  max-height: 100vh;
+}
+.tab label::after {
+  content: "\25b6";
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  display: block;
+  transition: all 0.4s;
+}
+.tab input:checked ~ label::after {
+  transform: rotate(90deg);
+}

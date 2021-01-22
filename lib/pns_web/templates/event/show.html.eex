@@ -1,33 +1,24 @@
-<h1>Show Event</h1>
+<h1>Application Event Details</h1>
+<table id="eventTable">
 
-<ul>
+  <tr>
+    <td>Name:</td>
+    <td><%= @event.name %></td>
+  </tr>
 
-  <li>
-    <strong>Website url:</strong>
-    <%= @event.website_url %>
-  </li>
+  <tr>
+    <td>Start time:</td>
+    <td><%= @event.start_time %></td>
+  </tr>
+  <tr>
+    <td>End time:</td>
+    <td><%= @event.end_time %></td>
+  </tr>
+  <tr>
+    <td>Html template:</td>
+    <td><textarea id= "event_html_template"><%= @event.html_template %></textarea></td>
+  </tr>
+</table>
 
-  <li>
-    <strong>Start time:</strong>
-    <%= @event.start_time %>
-  </li>
-
-  <li>
-    <strong>End time:</strong>
-    <%= @event.end_time %>
-  </li>
-
-  <li>
-    <strong>Html template:</strong>
-    <%= @event.html_template %>
-  </li>
-
-  <li>
-    <strong>Key:</strong>
-    <%= @event.key %>
-  </li>
-
-</ul>
-
-<span><%= link "Edit", to: Routes.event_path(@conn, :edit, @event) %></span>
-<span><%= link "Back", to: Routes.event_path(@conn, :index) %></span>
+<div class ="buttonDiv"><a href="<%= Routes.application_event_path(@conn, :edit, @event.application_id, @event) %>">Edit</a></div>
+<div class ="buttonDiv"><a href="<%= Routes.application_event_path(@conn, :index, @event.application_id) %>">Back</a></div>
