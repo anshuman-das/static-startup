@@ -825,7 +825,7 @@ header nav a {
 .emptyMessage {
   font-style: italic;
   font-size: 14px;
-  margin-bottom: 8px;
+  margin: 20px;
 }
 
 #eventTable {
