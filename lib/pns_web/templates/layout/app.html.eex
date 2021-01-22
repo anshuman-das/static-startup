@@ -17,7 +17,9 @@
             <%= if Plug.Conn.get_session(@conn, :user_id) == nil do %>
                 <li><a href="<%= Routes.static_path(@conn, "/auth/google") %>">Login</a></li>
               <% else %>
+              <li><a href="<%= Routes.static_path(@conn, "/applications") %>">Home</a></li>
                 <li><a href="<%= Routes.static_path(@conn, "/logout") %>">Logout</a></li>
+
               <% end %>
           </ul>
         </nav>

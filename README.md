@@ -7,8 +7,8 @@ To start your Phoenix server:
   * Install Node.js dependencies with `cd assets && npm install`
   * Start Phoenix endpoint with `mix phx.server`
 
-Now you can visit [`localhost:4002`](http://localhost:4002) from your browser.
+Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 Features:
 
- Google Authentication [`localhost:4002/auth/google`](http://localhost:4002/auth/google) from your browser.
+ Google Authentication [`localhost:4000/auth/google`](http://localhost:4000/auth/google) from your browser.

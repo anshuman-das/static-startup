@@ -5,10 +5,10 @@
     </div>
   <% end %>
 
-  <%= label f, :website_url %>
-  <%= text_input f, :website_url %>
-  <%= error_tag f, :website_url %>
-
+  <%= label f, :name %>
+  <%= text_input f, :name %>
+  <%= error_tag f, :name %>
+  
   <%= label f, :start_time %>
   <%= datetime_select f, :start_time %>
   <%= error_tag f, :start_time %>
@@ -20,7 +20,7 @@
   <%= label f, :html_template %>
   <%= textarea f, :html_template %>
   <%= error_tag f, :html_template %>
-  
+
   <div>
     <%= submit "Save" %>
   </div>

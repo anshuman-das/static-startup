@@ -1,8 +1,8 @@
 defmodule PnsWeb.AuthController do
   use PnsWeb, :controller
   plug Ueberauth
-  alias Pns.Repo
-  alias Pns.Account.User
+  alias Pns.Services.UserService
+  alias Pns.Schema.User
 
   def callback(%{assigns: %{ueberauth_failure: _fails}} = conn, _params) do
     conn
@@ -20,19 +20,19 @@ defmodule PnsWeb.AuthController do
     }
 
     result =
-      case Repo.get_by(User, email: auth.info.email) do
+      case UserService.get_user_by_email(email: auth.info.email) do
         nil -> %User{email: auth.info.email}
         user -> user
       end
       |> User.changeset(user_params)
-      |> Repo.insert_or_update()
+      |> UserService.upsert()
 
     case result do
       {:ok, user} ->
         conn
         |> put_flash(:info, "Thank you for signing in!")
         |> put_session(:user_id, user.id)
-        |> redirect(to: Routes.event_path(conn, :index))
+        |> redirect(to: Routes.application_path(conn, :index))
 
       {:error, _reason} ->
         conn
