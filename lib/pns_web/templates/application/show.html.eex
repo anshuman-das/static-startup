@@ -1,29 +1,25 @@
-<h1>Show Application</h1>
+<h1>Application Details</h1>
 
-<ul>
+<table id="applicationTable">
 
-  <li>
-    <strong>Name:</strong>
-    <%= link @application.name, to: Routes.application_event_path(@conn, :index, @application.id) %>
-  </li>
+  <tr>
+    <td>Name:</td>
+    <td><%= link @application.name, to: Routes.application_event_path(@conn, :index, @application.id) %></td>
+  </tr>
 
-  <li>
-    <strong>Description:</strong>
-    <%= @application.description %>
-  </li>
+  <tr>
+    <td>Description:</td>
+    <td><%= @application.description %></td>
+  </tr>
+  <tr>
+    <td>Website url:</td>
+    <td><%= @application.url %></td>
+  </tr>
+  <tr>
+    <td>Key:</td>
+    <td><%= @application.key %></td>
+  </tr>
+</table>
 
-  <li>
-    <strong>Website url:</strong>
-    <%= @application.url %>
-  </li>
-
-
-  <li>
-    <strong>Key:</strong>
-    <%= @application.key %>
-  </li>
-
-</ul>
-
-<span><%= link "Edit", to: Routes.application_path(@conn, :edit, @application) %></span>
-<span><%= link "Back", to: Routes.application_path(@conn, :index) %></span>
+<div class ="buttonDiv"><a href="<%= Routes.application_path(@conn, :edit, @application) %>">Edit</a></div>
+<div class ="buttonDiv"><a href="<%= Routes.application_path(@conn, :index) %>">Back</a></div>

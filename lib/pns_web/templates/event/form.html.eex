@@ -8,7 +8,7 @@
   <%= label f, :name %>
   <%= text_input f, :name %>
   <%= error_tag f, :name %>
-  
+
   <%= label f, :start_time %>
   <%= datetime_select f, :start_time %>
   <%= error_tag f, :start_time %>
@@ -21,7 +21,7 @@
   <%= textarea f, :html_template %>
   <%= error_tag f, :html_template %>
 
-  <div>
-    <%= submit "Save" %>
+  <div class = "eventSubmit">
+    <button class="buttonDiv" type="submit">Save</button>
   </div>
 <% end %>

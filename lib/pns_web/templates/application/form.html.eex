@@ -18,6 +18,7 @@
   <%= error_tag f, :description %>
 
   <div>
-    <%= submit "Save" %>
+    <button class="buttonDiv" type="submit">Save</button>
+    <div class ="buttonDiv"><a href="<%= Routes.application_path(@conn, :index) %>">Back</a></div>
   </div>
 <% end %>
