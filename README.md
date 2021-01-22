@@ -10,6 +10,5 @@ To start your Phoenix server:
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 Features:
- 
- Google Authentication [`localhost:4000/auth/google`](http://localhost:4000/auth/google) from your browser.
 
+ Google Authentication [`localhost:4000/auth/google`](http://localhost:4000/auth/google) from your browser.

@@ -3,6 +3,10 @@ defmodule PnsWeb.UserSocket do
 
   ## Channels
   # channel "room:*", PnsWeb.RoomChannel
+  channel "notifier:*", PnsWeb.NotifierChannel
+
+  ## Transports
+  transport(:websocket, Phoenix.Transports.WebSocket)
 
   # Socket params are passed from the client and can
   # be used to verify and authenticate a user. After
@@ -16,6 +20,10 @@ defmodule PnsWeb.UserSocket do
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
   def connect(_params, socket, _connect_info) do
+    {:ok, socket}
+  end
+
+  def connect(_params, socket) do
     {:ok, socket}
   end
 

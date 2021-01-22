@@ -6,24 +6,34 @@ defmodule PnsWeb.EventController do
 
   def index(conn, %{"application_id" => application_id}) do
     events = EventService.list_events(application_id)
+
     past_events =
       events
       |> Enum.filter(fn event ->
-      event.start_time < NaiveDateTime.utc_now()
-    end)
+        event.start_time < NaiveDateTime.utc_now()
+      end)
+
     current_events =
       events
       |> Enum.filter(fn event ->
-      event.start_time >= NaiveDateTime.utc_now() &&
-        event.end_time <= NaiveDateTime.utc_now()
-    end)
+        event.start_time >= NaiveDateTime.utc_now() &&
+          event.end_time <= NaiveDateTime.utc_now()
+      end)
+
     future_events =
       events
       |> Enum.filter(fn event ->
-      event.start_time > NaiveDateTime.utc_now() 
-    end)
+        event.start_time > NaiveDateTime.utc_now()
+      end)
 
-    render(conn, "index.html", data: %{past_events: past_events, current_events: current_events, future_events: future_events, application_id: application_id})
+    render(conn, "index.html",
+      data: %{
+        past_events: past_events,
+        current_events: current_events,
+        future_events: future_events,
+        application_id: application_id
+      }
+    )
   end
 
   def new(conn, %{"application_id" => application_id}) do
@@ -39,6 +49,12 @@ defmodule PnsWeb.EventController do
 
     case EventService.create_event(event_params) do
       {:ok, event} ->
+        #  Pns.Endpoint.broadcast!("notifier:" <> rid, "new_msg", %{uid: "uid", body: "body"})
+        PnsWeb.Endpoint.broadcast!("notifier:lobby", "new_msg", %{
+          uid: "uid",
+          body: "Time to show event: "
+        })
+
         conn
         |> put_flash(:info, "Event created successfully.")
         |> redirect(to: Routes.application_event_path(conn, :show, event.application_id, event))

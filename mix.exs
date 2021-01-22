@@ -46,7 +46,8 @@ defmodule Pns.MixProject do
       {:ueberauth_google, "~> 0.9"},
       {:elixir_uuid, "~> 1.2"},
       {:cors_plug, "~> 2.0"},
-      {:timex, "~> 3.6"}
+      {:timex, "~> 3.6"},
+      {:oban, "~> 2.3"}
     ]
   end
 
