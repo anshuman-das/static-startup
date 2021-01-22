@@ -23,12 +23,16 @@ defmodule PnsWeb.EventController do
 
     case EventService.create_event(event_params) do
       {:ok, event} ->
+        #  Pns.Endpoint.broadcast!("notifier:" <> rid, "new_msg", %{uid: "uid", body: "body"})
+        PnsWeb.Endpoint.broadcast!("notifier:lobby", "new_msg", %{
+          uid: "uid",
+          body: "Time to show event: "
+        })
+        |> IO.inspect(label: "notifier:lobby ==> : ")
+
         conn
         |> put_flash(:info, "Event created successfully.")
         |> redirect(to: Routes.application_event_path(conn, :show, event.application_id, event))
-
-        #  Pns.Endpoint.broadcast!("notifier:" <> rid, "new_msg", %{uid: "uid", body: "body"})
-        Pns.Endpoint.broadcast!("notifier:lobby", "new_msg", %{uid: "uid", body: "body"})
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)

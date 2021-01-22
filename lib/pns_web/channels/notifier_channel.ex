@@ -17,7 +17,7 @@ defmodule PnsWeb.NotifierChannel do
 
   def handle_in("new_msg", %{"uid" => uid, "body" => body}, socket) do
     broadcast_from!(socket, "new_msg", %{uid: uid, body: body})
-    Pns.Endpoint.broadcast_from!(self(), "room:superadmin", "new_msg", %{uid: uid, body: body})
+    PnsWeb.Endpoint.broadcast_from!(self(), "room:superadmin", "new_msg", %{uid: uid, body: body})
     {:noreply, socket}
   end
 
