@@ -16,8 +16,8 @@ defmodule Pns.Services.Api.EventService do
 
     EventService.get_events_by_application_id(application.id)
     |> Enum.filter(fn event ->
-      event.start_time >= NaiveDateTime.utc_now() &&
-        event.end_time <= NaiveDateTime.utc_now()
+      event.start_time <= NaiveDateTime.utc_now() &&
+        event.end_time >= NaiveDateTime.utc_now()
     end)
     |> List.first()
   end
