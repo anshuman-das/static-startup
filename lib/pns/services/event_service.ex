@@ -32,4 +32,8 @@ defmodule Pns.Services.EventService do
   def change_event(event) do
     Event.change_event(event)
   end
+
+  def get_all_active_events() do
+    Event.get_active_events()
+  end
 end

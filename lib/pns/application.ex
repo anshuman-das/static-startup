@@ -11,7 +11,8 @@ defmodule Pns.Application do
       # Start the Ecto repository
       Pns.Repo,
       # Start the endpoint when the application starts
-      PnsWeb.Endpoint
+      PnsWeb.Endpoint,
+      {Oban, oban_config()}
       # Starts a worker by calling: Pns.Worker.start_link(arg)
       # {Pns.Worker, arg},
     ]
@@ -27,5 +28,10 @@ defmodule Pns.Application do
   def config_change(changed, _new, removed) do
     PnsWeb.Endpoint.config_change(changed, removed)
     :ok
+  end
+
+  # Conditionally disable queues or plugins here.
+  defp oban_config do
+    Application.get_env(:pns, Oban)
   end
 end
