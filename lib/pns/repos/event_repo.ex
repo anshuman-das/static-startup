@@ -17,8 +17,8 @@ defmodule Pns.Repos.Event do
       [%Event{}, ...]
 
   """
-  def list_events do
-    Repo.all(Event)
+  def list_events(application_id) do
+    Repo.all(from e in Event, where: e.application_id == ^application_id)
   end
 
   @doc """

@@ -5,8 +5,8 @@ defmodule Pns.Services.EventService do
 
   alias Pns.Repos.Event
 
-  def list_events do
-    Event.list_events()
+  def list_events(application_id) do
+    Event.list_events(application_id)
   end
 
   def get_event(id) do

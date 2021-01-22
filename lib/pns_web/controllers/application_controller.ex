@@ -5,33 +5,14 @@ defmodule PnsWeb.ApplicationController do
   alias Pns.Services.ApplicationService
 
   def index(conn, _params) do
-    case Plug.Conn.get_session(conn, :user_id) do
-      nil ->
-        conn
-        |> put_flash(:error, "Please Login")
-        |> redirect(to: Routes.page_path(conn, :index))
+    applications = ApplicationService.list_applications(Plug.Conn.get_session(conn, :user_id))
 
-      _ ->
-        applications =
-          ApplicationService.list_applications()
-          |> Enum.filter(fn x -> x.creator_id == Plug.Conn.get_session(conn, :user_id) end)
-
-        IO.inspect(applications, label: ">>>>>>>>>")
-        render(conn, "index.html", applications: applications)
-    end
+    render(conn, "index.html", applications: applications)
   end
 
   def new(conn, _params) do
-    case Plug.Conn.get_session(conn, :user_id) do
-      nil ->
-        conn
-        |> put_flash(:error, "Please Login")
-        |> redirect(to: Routes.page_path(conn, :index))
-
-      _ ->
-        changeset = ApplicationService.change_application(%Application{})
-        render(conn, "new.html", changeset: changeset)
-    end
+    changeset = ApplicationService.change_application(%Application{})
+    render(conn, "new.html", changeset: changeset)
   end
 
   def create(conn, %{"application" => application_params}) do
@@ -52,30 +33,14 @@ defmodule PnsWeb.ApplicationController do
   end
 
   def show(conn, %{"id" => id}) do
-    case Plug.Conn.get_session(conn, :user_id) do
-      nil ->
-        conn
-        |> put_flash(:error, "Please Login")
-        |> redirect(to: Routes.page_path(conn, :index))
-
-      _ ->
-        application = ApplicationService.get_application(id)
-        render(conn, "show.html", application: application)
-    end
+    application = ApplicationService.get_application(id)
+    render(conn, "show.html", application: application)
   end
 
   def edit(conn, %{"id" => id}) do
-    case Plug.Conn.get_session(conn, :user_id) do
-      nil ->
-        conn
-        |> put_flash(:error, "Please Login")
-        |> redirect(to: Routes.page_path(conn, :index))
-
-      _ ->
-        application = ApplicationService.get_application(id)
-        changeset = ApplicationService.change_application(application)
-        render(conn, "edit.html", application: application, changeset: changeset)
-    end
+    application = ApplicationService.get_application(id)
+    changeset = ApplicationService.change_application(application)
+    render(conn, "edit.html", application: application, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "application" => application_params}) do

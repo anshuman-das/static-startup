@@ -26,6 +26,8 @@ defmodule PnsWeb.Router do
     get "/", PageController, :index
     get "/logout", AuthController, :delete
 
+    pipe_through PnsWeb.Plugs.Auth
+
     resources "/applications", ApplicationController do
       resources "/events", EventController
     end

@@ -5,32 +5,14 @@ defmodule PnsWeb.EventController do
   alias Pns.Schema.Event
 
   def index(conn, %{"application_id" => application_id}) do
-    case Plug.Conn.get_session(conn, :user_id) do
-      nil ->
-        conn
-        |> put_flash(:error, "Please Login")
-        |> redirect(to: Routes.page_path(conn, :index))
+    events = EventService.list_events(application_id)
 
-      _ ->
-        events =
-          EventService.list_events()
-          |> Enum.filter(fn x -> x.user_id == Plug.Conn.get_session(conn, :user_id) end)
-
-        render(conn, "index.html", data: %{events: events, application_id: application_id})
-    end
+    render(conn, "index.html", data: %{events: events, application_id: application_id})
   end
 
   def new(conn, %{"application_id" => application_id}) do
-    case Plug.Conn.get_session(conn, :user_id) do
-      nil ->
-        conn
-        |> put_flash(:error, "Please Login")
-        |> redirect(to: Routes.page_path(conn, :index))
-
-      _ ->
-        changeset = EventService.change_event(%Event{})
-        render(conn, "new.html", data: %{changeset: changeset, application_id: application_id})
-    end
+    changeset = EventService.change_event(%Event{})
+    render(conn, "new.html", data: %{changeset: changeset, application_id: application_id})
   end
 
   def create(conn, %{"application_id" => application_id, "event" => event_params}) do
@@ -38,7 +20,6 @@ defmodule PnsWeb.EventController do
       event_params
       |> Map.put("user_id", Plug.Conn.get_session(conn, :user_id))
       |> Map.put("application_id", application_id)
-      |> IO.inspect(label: ">>>>>>>>>>")
 
     case EventService.create_event(event_params) do
       {:ok, event} ->
@@ -52,30 +33,14 @@ defmodule PnsWeb.EventController do
   end
 
   def show(conn, %{"id" => id}) do
-    case Plug.Conn.get_session(conn, :user_id) do
-      nil ->
-        conn
-        |> put_flash(:error, "Please Login")
-        |> redirect(to: Routes.page_path(conn, :index))
-
-      _ ->
-        event = EventService.get_event(id)
-        render(conn, "show.html", event: event)
-    end
+    event = EventService.get_event(id)
+    render(conn, "show.html", event: event)
   end
 
   def edit(conn, %{"id" => id}) do
-    case Plug.Conn.get_session(conn, :user_id) do
-      nil ->
-        conn
-        |> put_flash(:error, "Please Login")
-        |> redirect(to: Routes.page_path(conn, :index))
-
-      _ ->
-        event = EventService.get_event(id)
-        changeset = EventService.change_event(event)
-        render(conn, "edit.html", event: event, changeset: changeset)
-    end
+    event = EventService.get_event(id)
+    changeset = EventService.change_event(event)
+    render(conn, "edit.html", event: event, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "event" => event_params}) do

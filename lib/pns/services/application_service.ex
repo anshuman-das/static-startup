@@ -5,8 +5,9 @@ defmodule Pns.Services.ApplicationService do
 
   alias Pns.Repos.Application
 
-  def list_applications do
+  def list_applications(user_id) do
     Application.list_applications()
+    |> Enum.filter(fn x -> x.creator_id == user_id end)
   end
 
   def get_application(id) do
