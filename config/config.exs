@@ -10,6 +10,13 @@ use Mix.Config
 config :pns,
   ecto_repos: [Pns.Repo]
 
+config :pns, Oban,
+  repo: Pns.Repo,
+  queues: [default: 1],
+  crontab: [
+    {"* * * * *", Support.Workers.MinuteWorker}
+  ]
+
 # Configures the endpoint
 config :pns, PnsWeb.Endpoint,
   url: [host: "localhost"],
