@@ -64,6 +64,11 @@
 }
 #regApplicationTable td a {
   padding: 0 5px;
+  color: #575195;
+  font-size: 18px;
+}
+#applicationEventsTable td a:hover {
+  color: #0069d9;
 }
 #regApplicationTable tr:nth-child(even) {
   background-color: #f2f2f2;
@@ -134,6 +139,11 @@
 }
 #applicationEventsTable td a {
   padding: 0 5px;
+  color: #575195;
+  font-size: 18px;
+}
+#applicationEventsTable td a:hover {
+  color: #0069d9;
 }
 #applicationEventsTable tr:nth-child(even) {
   background-color: #f2f2f2;
@@ -178,4 +188,48 @@
 }
 #eventTable td:first-child {
   font-weight: bold;
+}
+.accordion-container {
+  margin-bottom: 40px;
+}
+.tab {
+  position: relative;
+}
+.tab input {
+  display: none;
+}
+.tab label {
+  display: block;
+  margin-top: 10px;
+  padding: 10px;
+  color: #575195;
+  font-weight: bold;
+  background-color: #eeeeee2b;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  border-radius: 2px;
+}
+.tab .tab-content {
+  overflow: hidden;
+  transition: max-height 0.3s;
+  max-height: 0;
+  font-size: 14px;
+}
+
+.tab .tab-content p {
+  padding: 10px;
+}
+.tab input:checked ~ .tab-content {
+  max-height: 100vh;
+}
+.tab label::after {
+  content: "\25b6";
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  display: block;
+  transition: all 0.4s;
+}
+.tab input:checked ~ label::after {
+  transform: rotate(90deg);
 }
