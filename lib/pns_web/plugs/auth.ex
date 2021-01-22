@@ -7,7 +7,7 @@ defmodule PnsWeb.Plugs.Auth do
   def init(opts), do: opts
 
   def call(conn, _opts) do
-    if user_id = Plug.Conn.get_session(conn, :user_id) do
+    if _user_id = Plug.Conn.get_session(conn, :user_id) do
     else
       conn
       |> put_flash(:error, "Please Login")
