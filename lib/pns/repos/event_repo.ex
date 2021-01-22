@@ -38,6 +38,28 @@ defmodule Pns.Repos.Event do
   def get_event!(id), do: Repo.get!(Event, id)
 
   @doc """
+  Gets a list of events by application_id.
+
+  Raises `Ecto.NoResultsError` if the Event does not exist.
+
+  ## Examples
+
+      iex> get_events_by_application_id!(123)
+      [%Event{}]
+
+      iex> get_events_by_application_id!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_events_by_application_id!(application_id) do
+    from(
+      event in Event,
+      where: event.application_id == ^application_id
+    )
+    |> Repo.all()
+  end
+
+  @doc """
   Creates a event.
 
   ## Examples

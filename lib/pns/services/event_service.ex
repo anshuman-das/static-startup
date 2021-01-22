@@ -13,6 +13,10 @@ defmodule Pns.Services.EventService do
     Event.get_event!(id)
   end
 
+  def get_events_by_application_id(application_id) do
+    Event.get_events_by_application_id!(application_id)
+  end
+
   def create_event(attr) do
     Event.create_event(attr)
   end

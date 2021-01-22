@@ -38,6 +38,22 @@ defmodule Pns.Repos.Application do
   def get_application!(id), do: Repo.get!(Application, id)
 
   @doc """
+  Gets a single application by key.
+
+  Raises `Ecto.NoResultsError` if the Event does not exist.
+
+  ## Examples
+
+      iex> get_application_by_key!(123)
+      %Event{}
+
+      iex> get_application_by_key!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_application_by_key!(key), do: Repo.get_by!(Application, key: key)
+
+  @doc """
   Creates a application.
 
   ## Examples
