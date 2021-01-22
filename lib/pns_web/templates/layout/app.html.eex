@@ -7,28 +7,29 @@
     <title><%= assigns[:page_title] || "Push Notification Service (PNS)" %></title>
     <link rel="shortcut icon" type="image/jpg" href="<%= Routes.static_path(@conn, "/images/wm-favicon.png") %>"/>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.tiny.cloud/1/8h8fr7eiahxfaj81j0mg17ypoef998dmyh8vta4tktpmwmrl/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+  <script>tinymce.init({selector:'#event_html_template'});</script>
     <%= csrf_meta_tag() %>
   </head>
   <body>
     <header>
       <section class="container">
         <nav role="navigation">
-          <ul>
             <%= if Plug.Conn.get_session(@conn, :user_id) == nil do %>
-                <li><a href="<%= Routes.static_path(@conn, "/auth/google") %>">Login</a></li>
+                <div class ="buttonDiv"><a href="<%= Routes.static_path(@conn, "/auth/google") %>">Login</a></div>
               <% else %>
-              <li><a href="<%= Routes.static_path(@conn, "/applications") %>">Home</a></li>
-                <li><a href="<%= Routes.static_path(@conn, "/logout") %>">Logout</a></li>
-
+                <div class ="buttonDiv"><a href="<%= Routes.static_path(@conn, "/applications") %>">Home</a></div>
+                <div class ="buttonDiv"><a href="<%= Routes.static_path(@conn, "/logout") %>">Logout</a></div>
               <% end %>
-          </ul>
+
         </nav>
         <a href="https://www.watermarkinsights.com/" class="phx-logo">
           <img src="<%= Routes.static_path(@conn, "/images/wm-logo.png") %>" alt="Watermark Logo"/>
         </a>
       </section>
     </header>
-    <main role="main" class="container">
+    <main role="main" class="bodyContainer">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
       <%= render @view_module, @view_template, assigns %>
