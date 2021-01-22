@@ -14,6 +14,10 @@ defmodule Pns.Services.ApplicationService do
     Application.get_application!(id)
   end
 
+  def get_application_by_key(key) do
+    Application.get_application_by_key!(key)
+  end
+
   def create_application(attr) do
     Application.create_application(attr)
   end
