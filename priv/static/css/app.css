@@ -818,3 +818,21 @@ header nav a {
   margin-bottom: 8px;
 }
 
+#eventTable {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#eventTable td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#eventTable tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+#eventTable td:first-child {
+  font-weight: bold;
+}
+
