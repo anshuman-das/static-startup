@@ -148,4 +148,29 @@ defmodule Pns.Repos.Event do
         }
     )
   end
+
+  @doc """
+  Returns the list of active events.
+
+  ## Examples
+
+      iex> get_ending_events()
+      [%Event{}, ...]
+
+  """
+  def get_ending_events() do
+    date_time = DateTime.utc_now()
+
+    Repo.all(
+      from e in Event,
+        join: applications in Application,
+        on: e.application_id == applications.id,
+        where: e.end_time == ^date_time,
+        select: %{
+          id: e.id,
+          application_id: e.application_id,
+          application_key: applications.key
+        }
+    )
+  end
 end
