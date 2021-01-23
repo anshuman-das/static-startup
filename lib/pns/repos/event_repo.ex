@@ -6,7 +6,7 @@ defmodule Pns.Repos.Event do
   import Ecto.Query, warn: false
   alias Pns.Repo
 
-  alias Pns.Schema.Event
+  alias Pns.Schema.{Event, Application}
 
   @doc """
   Returns the list of events.
@@ -135,6 +135,17 @@ defmodule Pns.Repos.Event do
   """
   def get_active_events() do
     date_time = DateTime.utc_now()
-    Repo.all(from e in Event, where: e.start_time <= ^date_time and e.end_time >= ^date_time)
+
+    Repo.all(
+      from e in Event,
+        join: applications in Application,
+        on: e.application_id == applications.id,
+        where: e.start_time <= ^date_time and e.end_time >= ^date_time,
+        select: %{
+          id: e.id,
+          application_id: e.application_id,
+          application_key: applications.key
+        }
+    )
   end
 end

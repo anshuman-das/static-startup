@@ -12,7 +12,11 @@ defmodule Support.Workers.MinuteWorker do
 
     events
     |> Enum.map(fn event ->
-      event_details = %{application_id: event.application_id, id: event.id}
+      event_details = %{
+        application_id: event.application_id,
+        id: event.id,
+        application_key: event.application_key
+      }
 
       #  Pns.Endpoint.broadcast!("notifier:" <> rid, "new_msg", %{uid: "uid", body: "body"})
       PnsWeb.Endpoint.broadcast!("notifier:lobby", "event_started", %{
