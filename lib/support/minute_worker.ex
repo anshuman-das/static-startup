@@ -5,7 +5,7 @@ defmodule Support.Workers.MinuteWorker do
 
   @impl Oban.Worker
   def perform(_) do
-    events = EventService.get_all_active_events() |> IO.inspect(label: "--")
+    events = EventService.get_all_active_events()
     {:ok, events}
   end
 end

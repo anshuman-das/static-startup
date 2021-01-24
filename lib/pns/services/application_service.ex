@@ -33,4 +33,9 @@ defmodule Pns.Services.ApplicationService do
   def change_application(application) do
     Application.change_application(application)
   end
+
+  def get_recent_survey_data(id) do
+    Application.get_recent_survey_data(id)
+    # |> Enum.group_by(& &.)
+  end
 end
