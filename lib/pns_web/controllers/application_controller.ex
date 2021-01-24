@@ -36,8 +36,8 @@ defmodule PnsWeb.ApplicationController do
 
   def show(conn, %{"id" => id}) do
     application = ApplicationService.get_application(id)
-    recent_survey_data = ApplicationService.get_recent_survey_data(application.id)
-    render(conn, "show.html", %{application: application, survey_data: recent_survey_data})
+    ApplicationService.get_recent_survey_data(id)
+    render(conn, "show.html", application: application)
   end
 
   def edit(conn, %{"id" => id}) do

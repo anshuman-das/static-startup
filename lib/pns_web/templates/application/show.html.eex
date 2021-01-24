@@ -35,7 +35,6 @@
 </div>
 
 <script>
-
 Highcharts.chart('container', {
     chart: {
         plotBackgroundColor: null,
@@ -67,16 +66,7 @@ Highcharts.chart('container', {
     series: [{
         name: 'Brands',
         colorByPoint: true,
-        data: [{
-            name: 'Chrome',
-            y: 61.41
-            }, {
-            name: 'Internet Explorer',
-            y: 11.84
-        }, {
-            name: 'Firefox',
-            y: 10.85
-        }]
+        data: []
     }]
 });
 </script>
