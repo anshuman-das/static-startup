@@ -5,25 +5,41 @@ defmodule PnsWeb.EventController do
   alias Pns.Schema.Event
 
   def index(conn, %{"application_id" => application_id}) do
-    events = EventService.list_events(application_id)
+    naive_local_now = NaiveDateTime.local_now()
+
+    events =
+      EventService.list_events(application_id)
+      |> Enum.map(fn event ->
+        EventService.change_event_from_utc_to_local_time(event)
+      end)
+
     past_events =
       events
       |> Enum.filter(fn event ->
-      event.start_time < NaiveDateTime.utc_now()
-    end)
+        event.end_time < naive_local_now
+      end)
+
     current_events =
       events
       |> Enum.filter(fn event ->
-      event.start_time >= NaiveDateTime.utc_now() &&
-        event.end_time <= NaiveDateTime.utc_now()
-    end)
+        event.start_time <= naive_local_now &&
+          event.end_time >= naive_local_now
+      end)
+
     future_events =
       events
       |> Enum.filter(fn event ->
-      event.start_time > NaiveDateTime.utc_now() 
-    end)
+        event.start_time > naive_local_now
+      end)
 
-    render(conn, "index.html", data: %{past_events: past_events, current_events: current_events, future_events: future_events, application_id: application_id})
+    render(conn, "index.html",
+      data: %{
+        past_events: past_events,
+        current_events: current_events,
+        future_events: future_events,
+        application_id: application_id
+      }
+    )
   end
 
   def new(conn, %{"application_id" => application_id}) do
@@ -36,6 +52,7 @@ defmodule PnsWeb.EventController do
       event_params
       |> Map.put("user_id", Plug.Conn.get_session(conn, :user_id))
       |> Map.put("application_id", application_id)
+      |> EventService.change_event_params_from_local_to_utc_time()
 
     case EventService.create_event(event_params) do
       {:ok, event} ->
@@ -54,12 +71,19 @@ defmodule PnsWeb.EventController do
   end
 
   def edit(conn, %{"id" => id}) do
-    event = EventService.get_event(id)
+    event =
+      EventService.get_event(id)
+      |> EventService.change_event_from_utc_to_local_time()
+
     changeset = EventService.change_event(event)
     render(conn, "edit.html", event: event, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "event" => event_params}) do
+    event_params =
+      event_params
+      |> EventService.change_event_params_from_local_to_utc_time()
+
     event = EventService.get_event(id)
 
     case EventService.update_event(event, event_params) do

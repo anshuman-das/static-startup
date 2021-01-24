@@ -36,4 +36,62 @@ defmodule Pns.Services.EventService do
   def get_all_active_events() do
     Event.get_active_events()
   end
+
+  def get_ending_events() do
+    Event.get_ending_events()
+  end
+
+  def change_event_from_utc_to_local_time(event) do
+    naive_utc_now = NaiveDateTime.utc_now()
+    naive_local_now = NaiveDateTime.local_now()
+
+    event
+    |> Map.put(
+      :start_time,
+      NaiveDateTime.add(event.start_time, NaiveDateTime.diff(naive_local_now, naive_utc_now))
+    )
+    |> Map.put(
+      :end_time,
+      NaiveDateTime.add(event.end_time, NaiveDateTime.diff(naive_local_now, naive_utc_now))
+    )
+  end
+
+  def change_event_params_from_local_to_utc_time(event_params) do
+    naive_utc_now = NaiveDateTime.utc_now()
+    naive_local_now = NaiveDateTime.local_now()
+
+    start_time = event_params["start_time"]
+
+    {:ok, start_time} =
+      NaiveDateTime.new(
+        String.to_integer(start_time["year"]),
+        String.to_integer(start_time["month"]),
+        String.to_integer(start_time["day"]),
+        String.to_integer(start_time["hour"]),
+        String.to_integer(start_time["minute"]),
+        0
+      )
+
+    end_time = event_params["end_time"]
+
+    {:ok, end_time} =
+      NaiveDateTime.new(
+        String.to_integer(end_time["year"]),
+        String.to_integer(end_time["month"]),
+        String.to_integer(end_time["day"]),
+        String.to_integer(end_time["hour"]),
+        String.to_integer(end_time["minute"]),
+        0
+      )
+
+    event_params
+    |> Map.put(
+      "start_time",
+      NaiveDateTime.add(start_time, NaiveDateTime.diff(naive_utc_now, naive_local_now))
+    )
+    |> Map.put(
+      "end_time",
+      NaiveDateTime.add(end_time, NaiveDateTime.diff(naive_utc_now, naive_local_now))
+    )
+  end
 end

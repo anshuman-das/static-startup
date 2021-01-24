@@ -56,4 +56,10 @@ config :logger, level: :info
 
 # Finally import the config/prod.secret.exs which loads secrets
 # and configuration from environment variables.
-import_config "prod.secret.exs"
+# import_config "prod.secret.exs"
+
+# Configure your database
+config :pns, Pns.Repo,
+  ssl: true,   
+  url: System.get_env("DATABASE_URL"),   
+  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
