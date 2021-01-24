@@ -37,6 +37,10 @@ defmodule Pns.Services.EventService do
     Event.get_active_events()
   end
 
+  def get_ending_events() do
+    Event.get_ending_events()
+  end
+
   def change_event_from_utc_to_local_time(event) do
     naive_utc_now = NaiveDateTime.utc_now()
     naive_local_now = NaiveDateTime.local_now()
