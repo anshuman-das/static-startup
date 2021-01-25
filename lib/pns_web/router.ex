@@ -38,5 +38,11 @@ defmodule PnsWeb.Router do
 
     get "/current_event/:key", Api.EventController, :get_current_event_by_application_key
     get "/all_events/:key", Api.EventController, :get_all_events_by_application_key
+
+    post(
+      "/response",
+      Api.UserResponseController,
+      :post_user_response_by_application_key
+    )
   end
 end

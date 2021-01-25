@@ -66,8 +66,12 @@ Highcharts.chart('container', {
     series: [{
         name: 'Brands',
         colorByPoint: true,
-        data: <%= @data %>
-]
+        <%= for data <- @data do %>
+        data: {
+            name: data.name,
+            y: data.name
+            }
+        <% end %>
 
     }]
 });

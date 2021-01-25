@@ -39,11 +39,8 @@ defmodule Pns.Services.ApplicationService do
 
     sum = Enum.map(data, & &1.count) |> Enum.sum()
 
-    data =
-      Enum.map(data, fn x ->
+    Enum.map(data, fn x ->
         %{name: x.rating, y: x.count / sum * 100}
       end)
-
-    IO.inspect(data)
   end
 end
