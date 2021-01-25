@@ -28,12 +28,9 @@
                   <td><%= event.start_time %></td>
                   <td><%= event.end_time %></td>
                   <td>
-                  <a class = "fa fa-folder" href=" <%=Routes.application_event_path(@conn, :show, event.application_id, event) %>" title="View"></a>
-                  <a class = "fa fa-edit" href=" <%=Routes.application_event_path(@conn, :edit, event.application_id, event) %>" title="Edit"></a>
-                  <a class = "fa fa-trash" href=" <%=Routes.application_event_path(@conn, :delete, event.application_id, event)%>"
-                    title="Delete" data-confirm= "Are you sure?" data-method = "delete"
-                    data-to= " <%=Routes.application_event_path(@conn, :delete, event.application_id, event)%>" rel = "nofollow"
-                    data-csrf="H2EWfkJeZAZYbh4hcw1iG0IQATAHVjQ-iLNG4kIO29UJEw5a6H9eWfVg"></a>
+                    <span><%= link "", to: Routes.application_event_path(@conn, :show, event.application_id, event), class: "fa fa-folder", title: "View" %></span>
+                    <span><%= link "", to: Routes.application_event_path(@conn, :edit, event.application_id, event), class: "fa fa-edit" , title: "Edit"%></span>
+                    <span><%= link "", to: Routes.application_event_path(@conn, :delete, event.application_id, event), class: "fa fa-trash" , title: "Delete" , method: :delete, data: [confirm: "Are you sure ?"] %></span>
                   </td>
                 </tr>
             <% end %>
@@ -67,12 +64,9 @@
                       <td><%= event.start_time %></td>
                       <td><%= event.end_time %></td>
                       <td>
-                      <a class = "fa fa-folder" href=" <%=Routes.application_event_path(@conn, :show, event.application_id, event) %>" title="View"></a>
-                      <a class = "fa fa-edit" href=" <%=Routes.application_event_path(@conn, :edit, event.application_id, event) %>" title="Edit"></a>
-                      <a class = "fa fa-trash" href=" <%=Routes.application_event_path(@conn, :delete, event.application_id, event)%>"
-                        title="Delete" data-confirm= "Are you sure?" data-method = "delete"
-                        data-to= " <%=Routes.application_event_path(@conn, :delete, event.application_id, event)%>" rel = "nofollow"
-                        data-csrf="H2EWfkJeZAZYbh4hcw1iG0IQATAHVjQ-iLNG4kIO29UJEw5a6H9eWfVg"></a>
+                        <span><%= link "", to: Routes.application_event_path(@conn, :show, event.application_id, event), class: "fa fa-folder", title: "View" %></span>
+                        <span><%= link "", to: Routes.application_event_path(@conn, :edit, event.application_id, event), class: "fa fa-edit" , title: "Edit"%></span>
+                        <span><%= link "", to: Routes.application_event_path(@conn, :delete, event.application_id, event), class: "fa fa-trash" , title: "Delete" , method: :delete, data: [confirm: "Are you sure ?"] %></span>
                       </td>
                     </tr>
                 <% end %>
@@ -106,12 +100,9 @@
                       <td><%= event.start_time %></td>
                       <td><%= event.end_time %></td>
                       <td>
-                      <a class = "fa fa-folder" href=" <%=Routes.application_event_path(@conn, :show, event.application_id, event) %>" title="View"></a>
-                      <a class = "fa fa-edit" href=" <%=Routes.application_event_path(@conn, :edit, event.application_id, event) %>" title="Edit"></a>
-                      <a class = "fa fa-trash" href=" <%=Routes.application_event_path(@conn, :delete, event.application_id, event)%>"
-                        title="Delete" data-confirm= "Are you sure?" data-method = "delete"
-                        data-to= " <%=Routes.application_event_path(@conn, :delete, event.application_id, event)%>" rel = "nofollow"
-                        data-csrf="H2EWfkJeZAZYbh4hcw1iG0IQATAHVjQ-iLNG4kIO29UJEw5a6H9eWfVg"></a>
+                        <span><%= link "", to: Routes.application_event_path(@conn, :show, event.application_id, event), class: "fa fa-folder", title: "View" %></span>
+                        <span><%= link "", to: Routes.application_event_path(@conn, :edit, event.application_id, event), class: "fa fa-edit" , title: "Edit"%></span>
+                        <span><%= link "", to: Routes.application_event_path(@conn, :delete, event.application_id, event), class: "fa fa-trash" , title: "Delete" , method: :delete, data: [confirm: "Are you sure ?"] %></span>
                       </td>
                     </tr>
                 <% end %>

@@ -24,14 +24,9 @@
       <td><%= application.key %></td>
 
       <td>
-        <a class = "fa fa-folder" href=" <%=Routes.application_path(@conn, :show, application) %>" title="View"></a>
-        <a class = "fa fa-edit" href=" <%=Routes.application_path(@conn, :edit, application) %>" title="Edit"></a>
-        <a class = "fa fa-trash" href=" <%=Routes.application_path(@conn, :delete, application)%>"
-          title="Delete" data-confirm= "Are you sure?" data-method = "delete"
-          data-to= " <%=Routes.application_path(@conn, :delete, application)%>" rel = "nofollow"
-          data-csrf="H2EWfkJeZAZYbh4hcw1iG0IQATAHVjQ-iLNG4kIO29UJEw5a6H9eWfVg"></a>
-
-
+        <span><%= link "", to: Routes.application_path(@conn, :show, application), class: "fa fa-folder", title: "View" %></span>
+        <span><%= link "", to: Routes.application_path(@conn, :edit, application), class: "fa fa-edit" , title: "Edit"%></span>
+        <span><%= link "", to: Routes.application_path(@conn, :delete, application), class: "fa fa-trash" , title: "Delete" , method: :delete, data: [confirm: "Are you sure ?"] %></span>
       </td>
     </tr>
 <% end %>
