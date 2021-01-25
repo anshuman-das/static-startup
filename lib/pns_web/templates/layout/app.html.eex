@@ -8,8 +8,7 @@
     <link rel="shortcut icon" type="image/jpg" href="<%= Routes.static_path(@conn, "/images/wm-favicon.png") %>"/>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://cdn.tiny.cloud/1/8h8fr7eiahxfaj81j0mg17ypoef998dmyh8vta4tktpmwmrl/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-  <script>tinymce.init({selector:'#event_html_template'});</script>
+    
     <%= csrf_meta_tag() %>
   </head>
   <body>

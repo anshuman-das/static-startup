@@ -2,4 +2,4 @@
 
 <%= render "form.html", Map.put(assigns, :action, Routes.application_event_path(@conn, :update,@event.application_id, @event)) %>
 
-<span><%= link "Back", to: Routes.application_event_path(@conn, :index, @event.application_id) %></span>
+

@@ -7,6 +7,8 @@ defmodule Pns.Repos.Application do
   alias Pns.Repo
 
   alias Pns.Schema.Application
+  alias Pns.Schema.Event
+  alias Pns.Schema.UserResponse
 
   @doc """
   Returns the list of applications.
@@ -69,7 +71,6 @@ defmodule Pns.Repos.Application do
     %Application{}
     |> Application.changeset(attrs)
     |> Repo.insert()
-    |> IO.inspect(label: "MMMMMMMMMMMMMMMMM")
   end
 
   @doc """
@@ -117,5 +118,24 @@ defmodule Pns.Repos.Application do
   """
   def change_application(%Application{} = application) do
     Application.changeset(application, %{})
+  end
+
+  def get_recent_survey_data(application_id) do
+    current_time = DateTime.utc_now()
+
+    query =
+      from e in Event,
+        order_by: [desc: e.end_time],
+        where: e.application_id == ^application_id and e.end_time < ^current_time,
+        limit: 1
+
+    from(
+      ur in UserResponse,
+      left_join: e in subquery(query),
+      group_by: [e.name, ur.response],
+      select: %{name: e.name, rating: ur.response, count: count(ur.response)},
+      order_by: [asc: ur.response]
+    )
+    |> Repo.all()
   end
 end
