@@ -33,4 +33,14 @@ defmodule Pns.Services.ApplicationService do
   def change_application(application) do
     Application.change_application(application)
   end
+
+  def get_recent_survey_data(application_id) do
+    data = Application.get_recent_survey_data(application_id)
+
+    sum = Enum.map(data, & &1.count) |> Enum.sum()
+
+    Enum.map(data, fn x ->
+        %{name: x.rating, y: x.count / sum * 100}
+      end)
+  end
 end
