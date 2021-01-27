@@ -5,14 +5,8 @@ defmodule Support.Workers.MinuteWorker do
 
   @impl Oban.Worker
   def perform(_) do
-    events =
-      EventService.get_all_active_events()
-      |> IO.inspect(label: "--")
-      |> IO.inspect(label: "events==> ")
-
-    ending_events =
-      EventService.get_ending_events()
-      |> IO.inspect(label: "Ended events==> ")
+    events = EventService.get_all_active_events()
+    ending_events = EventService.get_ending_events()
 
     events
     |> Enum.map(fn event ->
@@ -27,7 +21,6 @@ defmodule Support.Workers.MinuteWorker do
         uid: "uid",
         body: event_details
       })
-      |> IO.inspect(label: "Inspect : ")
     end)
 
     ending_events
@@ -43,7 +36,6 @@ defmodule Support.Workers.MinuteWorker do
         uid: "uid",
         body: event_details
       })
-      |> IO.inspect(label: "Inspect : ")
     end)
 
     {:ok, events}
